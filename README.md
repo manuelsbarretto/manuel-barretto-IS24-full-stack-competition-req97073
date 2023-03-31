@@ -19,4 +19,5 @@ Run docker compose to setup working environment and run site files
 The process will take a few minutes.\
 Once both the backend and frontend environments are loaded it will run the app.\
 Open [http://localhost:3000](http://localhost:3000) to view backend API service in browser.\
-Open [http://localhost:8080](http://localhost:8080) to view frontend SPA in browser.
+Open [http://localhost:8080](http://localhost:8080) to view frontend SPA in browser.\
+Swagger API documentation can be viewed at [http://localhost:3000/api/api-docs](http://localhost:3000/api/api-docs)
