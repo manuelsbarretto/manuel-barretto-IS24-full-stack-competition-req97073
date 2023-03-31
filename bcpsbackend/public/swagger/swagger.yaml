@@ -1,0 +1,175 @@
+swagger: "2.0"
+info:
+  description: All the endpoints on the API can be tested here
+  version: 1.0.0
+  title: BC Public Service Demo API Endpoints
+basePath: /api/
+tags:
+  - name: Products
+    description: Manage Products
+  - name: Health
+    description: Check API Health
+
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Checks API health
+      description: "Check API health"
+      operationId: checkHealth
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful Operation
+        "400":
+          description: Bad Request
+  /products:
+    get:
+      tags:
+        - Products
+      summary: "Fetch products with this API"
+      description: Fetch all products
+      operationId: products
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful Operation
+        "400":
+          description: Bad Request
+    post:
+      tags:
+        - Products
+      summary: "Create Product with this API"
+      description: Create Product
+      operationId: createProduct
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: productName
+          type: string
+          required: true
+        - in: formData
+          name: productOwnerName
+          type: string
+          required: true
+        - in: formData
+          name: developers
+          type: string
+          required: true
+          description: Pass developers as a comma seperated string. eg. Paul, Ringo, John
+        - in: formData
+          name: scrumMasterName
+          type: string
+          required: true
+        - in: formData
+          name: startDate
+          type: string
+          required: true
+          description: Pass a valid date. eg. 2023/01/31
+        - in: formData
+          name: methodology
+          type: string
+          required: true
+          enum: ["Agile", "Waterfall"]
+      responses:
+        "200":
+          description: Successful Operation
+        "400":
+          description: Bad Request
+        "422":
+          description: Unprocessable Data
+  /products/{productId}:
+    get:
+      tags:
+        - Products
+      summary: "Fetch a single product with this API"
+      description: Fetch product with id that's passed
+      operationId: showProduct
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: productId
+          type: integer
+          required: true
+      responses:
+        "200":
+          description: Successful Operation
+        "400":
+          description: Bad Request
+    patch:
+      tags:
+        - Products
+      summary: "Update Product with this API"
+      description: Update Product
+      operationId: updateProduct
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: productId
+          type: integer
+          required: true
+        - in: formData
+          name: productName
+          type: string
+          required: true
+        - in: formData
+          name: productOwnerName
+          type: string
+          required: true
+        - in: formData
+          name: developers
+          type: string
+          required: true
+          description: Pass developers as a comma seperated string. eg. Paul, Ringo, John
+        - in: formData
+          name: scrumMasterName
+          type: string
+          required: true
+        - in: formData
+          name: methodology
+          type: string
+          required: true
+          enum: ["Agile", "Waterfall"]
+      responses:
+        "200":
+          description: Successful Operation
+        "400":
+          description: Bad Request
+        "422":
+          description: Unprocessable Data
+    delete:
+      tags:
+        - Products
+      summary: "Delete a product with this API"
+      description: Delete product with id that's passed
+      operationId: deleteProduct
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: productId
+          type: integer
+          required: true
+      responses:
+        "200":
+          description: Successful Operation
+        "400":
+          description: Bad Request

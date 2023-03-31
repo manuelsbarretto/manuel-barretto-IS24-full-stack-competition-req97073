@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
@@ -19,16 +20,30 @@ class ProductRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules(): array
+    public function rules(Request $request): array
     {
-        return [
-            "productName" => "required|string",
-            "productOwnerName" => "required|string",
-            "developers" => "required|string",
-            "scrumMasterName" => "required|string",
-            "startDate" => "required|date",
-            "methodology" => "required|string",
-            // "id" => 'required'
-        ];
+        if($request->route('product')) {
+
+            return [
+                "productName" => "required|string",
+                "productOwnerName" => "required|string",
+                "developers" => "required|string",
+                "scrumMasterName" => "required|string",
+                "methodology" => "required|string",
+            ];
+
+        } else {
+
+            return [
+                "productName" => "required|string",
+                "productOwnerName" => "required|string",
+                "developers" => "required|string",
+                "scrumMasterName" => "required|string",
+                "startDate" => "required|date",
+                "methodology" => "required|string",
+            ];
+
+        }
+
     }
 }

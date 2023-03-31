@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HealthController;
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Health Check
-Route::get('/health', [HealthController::class, 'healthCheck']);
+// Health Check Endpoint
+Route::get('/health', [GeneralController::class, 'healthCheck']);
 
 Route::resource('products', ProductController::class);
