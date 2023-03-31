@@ -5,7 +5,7 @@ services:
             context: ./bcpsbackend
             dockerfile: Dockerfile
         ports:
-            - 3000:8000
+            - 3000:3000
         volumes:
             - ./bcpsbackend:/app/bcpsbackend
         networks:
@@ -17,7 +17,7 @@ services:
             dockerfile: Dockerfile
         tty: true
         ports:
-            - 8080:3000
+            - 8080:8080
         volumes:
             - ./bcpsfrontend:/app/bcpsfrontend
             - /app/bcpsfrontend/node_modules

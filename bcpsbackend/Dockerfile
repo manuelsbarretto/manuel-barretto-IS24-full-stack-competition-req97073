@@ -25,6 +25,6 @@ WORKDIR /app/bcpsbackend
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 3000
 
 CMD bash -c "composer install && php artisan serve --host 0.0.0.0"
