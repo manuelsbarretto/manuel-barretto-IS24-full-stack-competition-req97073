@@ -19,7 +19,7 @@ const App = (props) => {
         const searchQueryString =
             "?" + new URLSearchParams(searchState).toString();
 
-        fetch("http://localhost:8000/api/products" + searchQueryString)
+        fetch("http://localhost:3000/api/products" + searchQueryString)
             .then((response) => response.json())
             .then((json) => {
                 if (json.errors) {
@@ -46,7 +46,7 @@ const App = (props) => {
             body: JSON.stringify(data),
         };
 
-        fetch("http://localhost:8000/api/products", requestOptions)
+        fetch("http://localhost:3000/api/products", requestOptions)
             .then((response) => response.json())
             .then((json) => {
                 if (json.errors) {
@@ -72,7 +72,7 @@ const App = (props) => {
                 },
                 body: JSON.stringify(data),
             };
-            const path = "http://localhost:8000/api/products/" + data.productId;
+            const path = "http://localhost:3000/api/products/" + data.productId;
             fetch(path, requestOptions)
                 .then((response) => {
                     return response.json();

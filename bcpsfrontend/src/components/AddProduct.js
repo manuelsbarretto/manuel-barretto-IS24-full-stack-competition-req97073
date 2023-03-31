@@ -19,16 +19,15 @@ const AddProduct = (props) => {
 
     const [errorsList, setErrorsList] = useState([]);
     const [formValues, setFormValues] = useState(initialFormValues);
-    const [formValid, setFormValid] = useState(0);
 
     useEffect(() => {
         setFormValues(initialFormValues);
-    }, [props.editProduct]);
+    }, [initialFormValues]);
 
     const productHandler = (event) => {
         event.preventDefault();
         let validationErrors = validateField(formValues);
-        if (validationErrors == 0) {
+        if (validationErrors === 0) {
             if (props.editProduct != null) {
                 props.onEditProduct(formValues);
             } else {
@@ -36,10 +35,6 @@ const AddProduct = (props) => {
             }
             setFormValues(initialFormValues);
         }
-    };
-
-    const errorHandler = () => {
-        return 1;
     };
 
     const onChangeHandler = (event) => {
@@ -72,8 +67,6 @@ const AddProduct = (props) => {
                 });
             }
         }
-
-        fieldErrors == 0 ? setFormValid(1) : setFormValid(0);
 
         return fieldErrors;
     };
