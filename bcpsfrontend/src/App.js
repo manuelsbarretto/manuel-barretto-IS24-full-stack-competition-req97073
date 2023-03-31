@@ -14,22 +14,31 @@ const App = (props) => {
         developers: "",
         scrummastername: "",
     });
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const searchQueryString =
-            "?" + new URLSearchParams(searchState).toString();
+        const identifier = setTimeout(() => {
+            setLoading(true);
+            const searchQueryString =
+                "?" + new URLSearchParams(searchState).toString();
 
-        fetch("http://localhost:3000/api/products" + searchQueryString)
-            .then((response) => response.json())
-            .then((json) => {
-                if (json.errors) {
-                    console.log(json.errors);
-                }
-                if (json.status === "Success") {
-                    setProductData(json.products);
-                }
-            })
-            .catch((error) => console.error(error));
+            fetch("http://localhost:3000/api/products" + searchQueryString)
+                .then((response) => response.json())
+                .then((json) => {
+                    if (json.errors) {
+                        console.log(json.errors);
+                    }
+                    if (json.status === "Success") {
+                        setProductData(json.products);
+                    }
+                    setLoading(false);
+                })
+                .catch((error) => console.error(error));
+        }, 500);
+
+        return () => {
+            clearTimeout(identifier);
+        };
     }, [searchState]);
 
     const formCloseHandler = () => {
@@ -46,6 +55,7 @@ const App = (props) => {
             body: JSON.stringify(data),
         };
 
+        setLoading(true);
         fetch("http://localhost:3000/api/products", requestOptions)
             .then((response) => response.json())
             .then((json) => {
@@ -55,6 +65,7 @@ const App = (props) => {
                 if (json.status === "Success") {
                     setProductData(json.products);
                 }
+                setLoading(false);
             })
             .catch((error) => console.error(error));
     };
@@ -73,6 +84,7 @@ const App = (props) => {
                 body: JSON.stringify(data),
             };
             const path = "http://localhost:3000/api/products/" + data.productId;
+            setLoading(true);
             fetch(path, requestOptions)
                 .then((response) => {
                     return response.json();
@@ -87,6 +99,7 @@ const App = (props) => {
                         setIsEdit(1);
                         setEditProduct(null);
                     }
+                    setLoading(false);
                 })
                 .catch((error) => console.error(error));
         }
@@ -120,8 +133,38 @@ const App = (props) => {
         });
     };
 
+    const Loader = () => (
+        <div className={classes.divLoader}>
+            <svg
+                className={classes.svgLoader}
+                viewBox="0 0 100 100"
+                width="10em"
+                height="10em"
+            >
+                <path
+                    stroke="none"
+                    d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50"
+                    fill="#51CACC"
+                    transform="rotate(179.719 50 51)"
+                >
+                    <animateTransform
+                        attributeName="transform"
+                        type="rotate"
+                        calcMode="linear"
+                        values="0 50 51;360 50 51"
+                        keyTimes="0;1"
+                        dur="1s"
+                        begin="0s"
+                        repeatCount="indefinite"
+                    ></animateTransform>
+                </path>
+            </svg>
+        </div>
+    );
+
     return (
         <div className={classes.App}>
+            {loading ? <Loader /> : null}
             <Header />
             <div className={classes.pullright}>
                 <Button onClick={formVisibilityHandler}>Add Product</Button>
