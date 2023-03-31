@@ -13,7 +13,11 @@ const ProductItem = (props) => {
             <td>{props.product.productId}</td>
             <td>{props.product.productName}</td>
             <td>{props.product.productOwnerName}</td>
-            <td>{props.product.developers.join(", ")}</td>
+            <td>
+                {typeof props.product.developers === "object"
+                    ? props.product.developers.join(", ")
+                    : props.product.developers}
+            </td>
             <td>{props.product.scrumMasterName}</td>
             <td>{props.product.startDate}</td>
             <td>{props.product.methodology}</td>

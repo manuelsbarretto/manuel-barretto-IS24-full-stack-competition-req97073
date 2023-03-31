@@ -4,6 +4,7 @@ import AddProduct from "./components/AddProduct";
 import Header from "./components/Header";
 import ProductsHolder from "./components/ProductsHolder";
 import Button from "./components/UI/Button";
+import Alert from "./components/UI/Alert";
 
 const App = (props) => {
     const [formDisplay, setFormDisplay] = useState(0);
@@ -14,7 +15,22 @@ const App = (props) => {
         developers: "",
         scrummastername: "",
     });
+    const [alertState, setAlertState] = useState({
+        set: false,
+        message: "",
+    });
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setAlertState((prevState) => {
+                return {
+                    ...prevState,
+                    set: false,
+                };
+            });
+        }, 2000);
+    }, [alertState]);
 
     useEffect(() => {
         const identifier = setTimeout(() => {
@@ -30,6 +46,13 @@ const App = (props) => {
                     }
                     if (json.status === "Success") {
                         setProductData(json.products);
+                        setAlertState((prevState) => {
+                            return {
+                                ...prevState,
+                                set: true,
+                                message: json.message,
+                            };
+                        });
                     }
                     setLoading(false);
                 })
@@ -64,6 +87,13 @@ const App = (props) => {
                 }
                 if (json.status === "Success") {
                     setProductData(json.products);
+                    setAlertState((prevState) => {
+                        return {
+                            ...prevState,
+                            set: true,
+                            message: json.message,
+                        };
+                    });
                 }
                 setLoading(false);
             })
@@ -73,6 +103,7 @@ const App = (props) => {
     const editProductHandler = (data) => {
         if (data.productId) {
             if (typeof data.developers === "object") {
+                console.log(data.developers);
                 data.developers = data.developers.join(", ");
             }
             const requestOptions = {
@@ -98,6 +129,13 @@ const App = (props) => {
                         setProductData(json.products);
                         setIsEdit(1);
                         setEditProduct(null);
+                        setAlertState((prevState) => {
+                            return {
+                                ...prevState,
+                                set: true,
+                                message: json.message,
+                            };
+                        });
                     }
                     setLoading(false);
                 })
@@ -127,7 +165,7 @@ const App = (props) => {
         const value = event.target.value;
         setSearchState((prevState) => {
             return {
-                ...searchState,
+                ...prevState,
                 [name]: value,
             };
         });
@@ -166,6 +204,8 @@ const App = (props) => {
         <div className={classes.App}>
             {loading ? <Loader /> : null}
             <Header />
+            {alertState.set ? <Alert message={alertState.message} /> : null}
+
             <div className={classes.pullright}>
                 <Button onClick={formVisibilityHandler}>Add Product</Button>
             </div>
