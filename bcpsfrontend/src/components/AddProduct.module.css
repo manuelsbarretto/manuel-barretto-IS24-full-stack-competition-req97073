@@ -1,0 +1,58 @@
+.heading {
+    margin: 0 1rem;
+    padding: 0;
+}
+
+.input,
+.select {
+    margin: 2rem 4em 0;
+    padding: 1rem 0.5rem;
+    width: 90%;
+}
+
+.input label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+}
+
+.input input,
+.input select {
+    font: inherit;
+    display: block;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 0.4rem;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+}
+
+.input input:focus,
+.input select:focus {
+    outline: none;
+    border-color: #4f005f;
+}
+
+.haserror {
+    border: 1px solid red !important;
+}
+
+.flexer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.flexer div {
+    padding: 1rem 1rem;
+    width: 100%;
+}
+
+.buttonHolder {
+    margin-left: 1rem;
+}
+
+.mildflex {
+    display: flex;
+}

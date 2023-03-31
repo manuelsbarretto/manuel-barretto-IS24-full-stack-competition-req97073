@@ -1,0 +1,21 @@
+// Source : https://json-generator.com/
+
+[
+  '{{repeat(40)}}',
+  {
+    productId: '{{index(1)}}',
+    productName: '{{company()}}',
+    productOwnerName: '{{firstName()}}',
+    developers: function (tags) {
+      var names = ['Fred', 'Velma', 'Shaggy', 'Scooby', 'Daphne', 'Betty', 'Barney', 'Wilma', 'George', 'Jane', 'Elroy', 'Judy'];
+      var shuffle = names.sort( function( a , b){
+        return Math.random() - Math.random();
+      });
+      var selected = shuffle.slice(0, Math.random() * (6 - 1) + 1);
+      return selected;
+    },
+    scrumMasterName: '{{random("John", "Paul", "George", "Ringo")}}',
+    startDate: '{{date(new Date(2023, 0, 1), new Date(2023, 12, 31), "YYYY-MM-dd")}}',
+    methodology: '{{random("Agile", "Waterfall")}}'
+  }
+]

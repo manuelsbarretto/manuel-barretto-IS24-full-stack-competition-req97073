@@ -1,0 +1,46 @@
+.App {
+    margin-top: 7rem;
+}
+
+.pullright {
+    text-align: right;
+}
+
+.totalsHolder {
+    margin: 0rem 4em 0;
+    padding: 0;
+    text-align: right;
+    font-size: 16px;
+}
+
+.formflex {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2rem 4.5em 0;
+    padding: 1rem 0.5rem;
+    gap: 1.7rem;
+}
+
+.formflex label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+}
+
+.formflex input,
+.formflex select {
+    font: inherit;
+    display: block;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 0.4rem;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+}
+
+.formflex input:focus,
+.formflex select:focus {
+    outline: none;
+    border-color: #4f005f;
+}

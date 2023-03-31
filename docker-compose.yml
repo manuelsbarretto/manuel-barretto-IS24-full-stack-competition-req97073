@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+    backend:
+        build:
+            context: ./bcpsbackend
+            dockerfile: Dockerfile
+        ports:
+            - 8000:8000
+        volumes:
+            - ./bcpsbackend:/app/bcpsbackend
+        networks:
+            - app
+
+    frontend:
+        build:
+            context: ./bcpsfrontend
+            dockerfile: Dockerfile
+        tty: true
+        ports:
+            - 8001:3000
+        volumes:
+            - ./bcpsfrontend:/app/bcpsfrontend
+        depends_on:
+            - backend
+        networks:
+            - app
+
+networks:
+    app:
+        driver: bridge
